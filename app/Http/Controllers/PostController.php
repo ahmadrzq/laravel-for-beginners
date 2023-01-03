@@ -7,7 +7,8 @@ use App\Models\Post;
 
 class PostController extends Controller
 {
-    public function index(){
+    public function index()
+    {
         $posts = Post::latest()->paginate(5);
         return view('posts.index', compact('posts'));
     }
@@ -39,5 +40,13 @@ class PostController extends Controller
 
         //redirect to index
         return redirect()->route('posts.index')->with(['success' => 'Data Berhasil Disimpan!']);
+    }
+    public function show($id)
+    {
+        //get post by ID
+        $post = Post::find($id);
+
+        //return view
+        return view('posts.show', compact('post'));
     }
 }
